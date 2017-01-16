@@ -12,6 +12,8 @@ var oNumberFormat = sap.ui.core.format.NumberFormat.getFloatInstance({
 
 });
 // Comment Test
+// Test 2
+// Test 3
 var oNumberFormatTotal = sap.ui.core.format.NumberFormat.getFloatInstance({
 
 	minFractionDigits: 2,
