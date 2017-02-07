@@ -1624,685 +1624,314 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 
 
 * @memberOf zui5_ttg_app001.SaleReport
-
-
-
 */
-
 	exportToExcel: function(oEvent) {
-
 		var oModel = new sap.ui.model.json.JSONModel();
-
 		var dataObj = {
-
 			"oData": oDataReport
-
 		};
-
 		oModel.setData(dataObj);
-
-		if (sReportType == "detail") {
-
-			var oExport = new sap.ui.core.util.Export({
-
-				exportType: new sap.ui.core.util.ExportTypeCSV({
-
-					separatorChar: ";"
-
-				}),
-
-				models: oModel,
-
-				rows: {
-
-					path: "/oData/results"
-
-				},
-
-				columns: [{
-
-					name: "Fatura No",
-
-					template: {
-
-						content: "{Vbeln}"
-
-					}
-
-          }, {
-
-					name: "Fatura Tarihi",
-
-					template: {
-
-						content: "{FkdatText}"
-
-					}
-
-          }, {
-
-					name: "Fatura Saati",
-
-					template: {
-
-						content: "{ErzetText}"
-
-					}
-
-          }, {
-
-					name: "NMU",
-
-					template: {
-
-						content: "{Matnr}"
-
-					}
-
-          }, {
-
-					name: "Tanım",
-
-					template: {
-
-						content: "{Arktx}"
-
-					}
-
-          }, {
-
-					name: "Seri No",
-
-					template: {
-
-						content: "{Zseri}"
-
-					}
-
-          }, {
-
-					name: "Miktar",
-
-					template: {
-
-						content: "{Fkimg}"
-
-					}
-
-          }, {
-
-					name: "Birim",
-
-					template: {
-
-						content: "ADT"
-
-					}
-
-          }, {
-
-					name: "Toplam Tutar",
-
-					template: {
-
-						content: "{ToplamText}"
-
-					}
-
-          }, {
-
-					name: "Birim",
-
-					template: {
-
-						content: "TL"
-
-					}
-
-          }, {
-
-					name: "Müşteri İsmi",
-
-					template: {
-
-						content: "{Name1}"
-
-					}
-
-          }, {
-
-					name: "Bayi",
-
-					template: {
-
-						content: "{Name1w}"
-
-					}
-
-          }, {
-
-					name: "Kullanıcı",
-
-					template: {
-
-						content: "{Ernam}"
-
-					}
-
-          }, {
-
-					name: "Satış Temsilcisi",
-
-					template: {
-
-						content: "{Vadsoyad}"
-
-					}
-
-          }, {
-
-					name: "Ödeme Tipi",
-
-					template: {
-
-						content: "{Vtext}"
-
-					}
-
-          }, {
-
-					name: "Çıktı Tipi",
-
-					template: {
-
-						content: "{Bezei}"
-
-					}
-
-          }, {
-
-					name: "İşlem Kanalı",
-
-					template: {
-
-						content: "{Iktext}"
-
-					}
-
-          }, {
-
-					name: "Provizyon ID",
-
-					template: {
-
-						content: "{Bstkd}"
-
-					}
-
-          }, {
-
-					name: "İşlem Tipi",
-
-					template: {
-
-						content: "{Fvtext}"
-
-					}
-
-          }, {
-
-					name: "Müşteri Tipi",
-
-					template: {
-
-						content: "{Title}"
-
-					}
-
-          }, {
-
-					name: "Fiş No",
-
-					template: {
-
-						content: "{Docno}"
-
-					}
-
-          }, {
-
-					name: "Matbu No",
-
-					template: {
-
-						content: "{Zzmatbuno}"
-
-					}
-
-          }, {
-
-					name: "Fatura Açıklama Metni",
-
-					template: {
-
-						content: "{Z001text}"
-
-					}
-
-          }]
-
+		
+		//sprint7---------------------------------------------------------------------------------------------------------------
+		var oFormSelection = new sap.ui.layout.form.SimpleForm();
+		var oCheckboxCSV = new sap.m.CheckBox();
+		var oCheckboxXSLX = new sap.m.CheckBox();
+		oCheckboxCSV.attachSelect(function() {
+				oCheckboxXSLX.setSelected(false);
 			});
-
-		} else {
-
-			var oExport = new sap.ui.core.util.Export({
-
-				exportType: new sap.ui.core.util.ExportTypeCSV({
-
-					separatorChar: ";"
-
-				}),
-
-				models: oModel,
-
-				rows: {
-
-					path: "/oData/results"
-
-				},
-
-				columns: [{
-
-					name: "Fatura No",
-
-					template: {
-
-						content: "{Vbeln}"
-
-					}
-
-                  }, {
-
-					name: "Fatura Tarihi",
-
-					template: {
-
-						content: "{FkdatText}"
-
-					}
-
-                  }, {
-
-					name: "Fatura Saati",
-
-					template: {
-
-						content: "{ErzetText}"
-
-					}
-
-                  }, {
-
-					name: "Toplam Tutar",
-
-					template: {
-
-						content: "{ToplamText}"
-
-					}
-
-                  }, {
-
-					name: "Birim",
-
-					template: {
-
-						content: "TL"
-
-					}
-
-                  }, {
-
-					name: "Müşteri İsmi",
-
-					template: {
-
-						content: "{Name1}"
-
-					}
-
-                  }, {
-
-					name: "Bayi",
-
-					template: {
-
-						content: "{Name1w}"
-
-					}
-
-                  }, {
-
-					name: "Kullanıcı",
-
-					template: {
-
-						content: "{Ernam}"
-
-					}
-
-                  }, {
-
-					name: "Satış Temsilcisi",
-
-					template: {
-
-						content: "{Vadsoyad}"
-
-					}
-
-                  }, {
-
-					name: "Ödeme Tipi",
-
-					template: {
-
-						content: "{Vtext}"
-
-					}
-
-                  }, {
-
-					name: "Çıktı Tipi",
-
-					template: {
-
-						content: "{Bezei}"
-
-					}
-
-                  }, {
-
-					name: "İşlem Kanalı",
-
-					template: {
-
-						content: "{Iktext}"
-
-					}
-
-                  }, {
-
-					name: "Provizyon ID",
-
-					template: {
-
-						content: "{Bstkd}"
-
-					}
-
-                  }, {
-
-					name: "İşlem Tipi",
-
-					template: {
-
-						content: "{Fvtext}"
-
-					}
-
-                  }, {
-
-					name: "Müşteri Tipi",
-
-					template: {
-
-						content: "{Title}"
-
-					}
-
-                  }, {
-
-					name: "Fiş No",
-
-					template: {
-
-						content: "{Docno}"
-
-					}
-
-                  }, {
-
-					name: "Matbu No",
-
-					template: {
-
-						content: "{Zzmatbuno}"
-
-					}
-
-                  }]
-
-			});
-
-		}
-
-		oExport.saveFile();
-
+		oCheckboxXSLX.attachSelect(function() {
+				oCheckboxCSV.setSelected(false);
+		});
+		
+		
+		oFormSelection.addContent(new sap.m.Label({
+				text: "CSV Formatı"
+			}));
+		oFormSelection.addContent(oCheckboxCSV);
+		
+		oFormSelection.addContent(new sap.m.Label({
+				text: "XSLX Formatı"
+			}));
+		oFormSelection.addContent(oCheckboxXSLX);
+		
+			oDialog = new sap.m.Dialog({
+						title: "Lütfen format seçiniz.",
+						rightButton: new sap.m.Button({
+							text: "Tamam",
+							icon: "sap-icon://accept",
+							press: function() {
+								var bCSV = oCheckboxCSV.getSelected();
+								var bXSLX = oCheckboxXSLX.getSelected();
+								if(bCSV === true) {
+									if(sReportType === "detail"){
+									var oExport = new sap.ui.core.util.Export({
+									exportType: new sap.ui.core.util.ExportTypeCSV({
+									separatorChar: ";"
+									}),
+									models: oModel,
+									rows: {
+										path: "/oData/results"
+									},
+									columns: [{name: "Fatura No",template: {content: "{Vbeln}"}
+        							}, {name: "Fatura Tarihi",template: {content: "{FkdatText}"}
+        							}, {name: "Fatura Saati",template: {content: "{ErzetText}"}
+        							}, {name: "NMU",template: {content: "{Matnr}"}
+        							}, {name: "Tanım",template: {content: "{Arktx}"}
+        							}, {name: "Seri No",template: {content: "{Zseri}"}
+        							}, {name: "Miktar",template: {content: "{Fkimg}"}
+            						}, {name: "Birim",template: {content: "ADT"}
+              						}, {name: "Toplam Tutar",template: {content: "{ToplamText}"}
+            						}, {name: "Birim",template: {content: "TL"}
+        							}, {name: "Müşteri İsmi",template: {content: "{Name1}"}
+        							}, {name: "Bayi",template: {content: "{Name1w}"}
+        							}, {name: "Kullanıcı",template: {content: "{Ernam}"}
+        							}, {name: "Satış Temsilcisi",template: {content: "{Vadsoyad}"}
+        							}, {name: "Ödeme Tipi",template: {content: "{Vtext}"}
+	        						}, {name: "Çıktı Tipi",template: {content: "{Bezei}"}
+        							}, {name: "İşlem Kanalı",template: {content: "{Iktext}"}
+        							}, {name: "Provizyon ID",template: {content: "{Bstkd}"}
+        							}, {name: "İşlem Tipi",template: {content: "{Fvtext}"}
+        							}, {name: "Müşteri Tipi",template: {content: "{Title}"}
+        							}, {name: "Fiş No",template: {content: "{Docno}"}
+        							}, {name: "Matbu No",template: {content: "{Zzmatbuno}"}
+        							}, {name: "Fatura Açıklama Metni",template: {content: "{Z001text}"}
+        							}]});
+        							
+									}
+									else{
+									var oExport = new sap.ui.core.util.Export({
+									exportType: new sap.ui.core.util.ExportTypeCSV({
+									separatorChar: ";"
+									}),
+									models: oModel,
+									rows: {
+									path: "/oData/results"
+									},
+									columns: [{name: "Fatura No",template: {content: "{Vbeln}"}
+									}, {name: "Fatura Tarihi",template: {content: "{FkdatText}"}
+                					}, {name: "Fatura Saati",template: {content: "{ErzetText}"}
+                					}, {name: "Toplam Tutar",template: {content: "{ToplamText}"}
+                					}, {name: "Birim",template: {content: "TL"}
+                					}, {name: "Müşteri İsmi",template: {content: "{Name1}"}
+                					}, {name: "Bayi",template: {content: "{Name1w}"}
+	            					}, {name: "Kullanıcı",template: {content: "{Ernam}"}
+                					}, {name: "Satış Temsilcisi",template: {content: "{Vadsoyad}"}
+                					}, {name: "Ödeme Tipi",template: {content: "{Vtext}"}
+                					}, {name: "Çıktı Tipi",template: {content: "{Bezei}"}
+                					}, {name: "İşlem Kanalı",template: {content: "{Iktext}"}
+                					}, {name: "Provizyon ID",template: {content: "{Bstkd}"}
+                					}, {name: "İşlem Tipi",template: {content: "{Fvtext}"}
+                					}, {name: "Müşteri Tipi",template: {content: "{Title}"}
+                					}, {name: "Fiş No",template: {content: "{Docno}"}
+                					}, {name: "Matbu No",template: {content: "{Zzmatbuno}"}
+            						 }]
+									});
+										
+									}
+								oExport.saveFile();
+							}
+							else if(bXSLX === true){
+								if(sReportType === "detail"){
+											var j = 0;
+											var file = {
+									worksheets: [[]], // worksheets has one empty worksheet (array)
+									creator: '',
+									created: new Date(),
+									lastModifiedBy: '',
+									modified: new Date(),
+									activeWorksheet: 0
+									},
+								w = file.worksheets[0];
+								
+								w.name = "sheet-1";
+								w.push([]);
+								w[0].push("Fatura No");
+								w[0].push("Fatura Tarihi");
+								w[0].push("Fatura Saati");
+								w[0].push("NMU");
+								w[0].push("Tanım");
+								w[0].push("Seri No");
+								w[0].push("Miktar");
+								w[0].push("Birim");
+								w[0].push("Toplam Tutar");
+								w[0].push("Birim");
+								w[0].push("Müşteri İsmi");
+								w[0].push("Bayi");
+								w[0].push("Kullanıcı");
+								w[0].push("Satış Temsilcisi");
+								w[0].push("Ödeme Tipi");
+								w[0].push("Çıktı Tipi");
+								w[0].push("İşlem Kanalı");
+								w[0].push("Provizyon ID");
+								w[0].push("İşlem Tipi");
+								w[0].push("Müşteri Tipi");
+								w[0].push("Fiş No");
+								w[0].push("Matbu No");
+								w[0].push("Fatura Açıklama Metni");
+
+							for (var i = 1; i <= dataObj.oData.results.length; i++) {
+
+								j = i - 1;
+								w.push([]);
+								w[i].push(dataObj.oData.results[j].Vbeln);
+								w[i].push(dataObj.oData.results[j].FkdatText);
+								w[i].push(dataObj.oData.results[j].ErzetText);
+								w[i].push(dataObj.oData.results[j].Matnr);
+								w[i].push(dataObj.oData.results[j].Arktx);
+								w[i].push(dataObj.oData.results[j].Zseri);
+								w[i].push(dataObj.oData.results[j].Fkimg);
+								w[i][7] = "ADT";
+								w[i].push(dataObj.oData.results[j].ToplamText);
+								w[i][9] = "TL";
+								w[i].push(dataObj.oData.results[j].Name1);
+								w[i].push(dataObj.oData.results[j].Name1w);
+								w[i].push(dataObj.oData.results[j].Ernam);
+								w[i].push(dataObj.oData.results[j].Vadsoyad);
+								w[i].push(dataObj.oData.results[j].Vtext);
+								w[i].push(dataObj.oData.results[j].Bezei);
+								w[i].push(dataObj.oData.results[j].Iktext);
+								w[i].push(dataObj.oData.results[j].Bstkd);
+								//w[i].push(dataObj.oData.results[j].Fvtext);
+								w[i][18] = "";
+								w[i].push(dataObj.oData.results[j].Title);
+								w[i].push(dataObj.oData.results[j].Docno);
+								w[i].push(dataObj.oData.results[j].Zzmatbuno);
+								w[i].push(dataObj.oData.results[j].Z001text);
+
+							}
+						}
+								else{
+								var j = 0;
+								var file = {
+									worksheets: [[]], // worksheets has one empty worksheet (array)
+									creator: '',
+									created: new Date(),
+									lastModifiedBy: '',
+									modified: new Date(),
+									activeWorksheet: 0
+									},
+								w = file.worksheets[0];
+
+								w.name = "sheet-1";
+								w.push([]);
+								w[0].push("Fatura No");
+								w[0].push("Fatura Tarihi");
+								w[0].push("Fatura Saati");
+								w[0].push("Toplam Tutar");
+								w[0].push("Birim");
+								w[0].push("Müşteri İsmi");
+								w[0].push("Bayi");
+								w[0].push("Kullanıcı");
+								w[0].push("Satış Temsilcisi");
+								w[0].push("Ödeme Tipi");
+								w[0].push("Çıktı Tipi");
+								w[0].push("İşlem Kanalı");
+								w[0].push("Provizyon ID");
+								w[0].push("İşlem Tipi");
+								w[0].push("Müşteri Tipi");
+								w[0].push("Fiş No");
+								w[0].push("Matbu No");
+
+							for (var i = 1; i <= dataObj.oData.results.length; i++) {
+
+								j = i - 1;
+		
+								w.push([]);
+								w[i].push(dataObj.oData.results[j].Vbeln);
+								w[i].push(dataObj.oData.results[j].FkdatText);
+								w[i].push(dataObj.oData.results[j].ErzetText);
+								w[i].push(dataObj.oData.results[j].ToplamText);
+								w[i][4] = "TL";
+								w[i].push(dataObj.oData.results[j].Name1);
+								w[i].push(dataObj.oData.results[j].Name1w);
+								w[i].push(dataObj.oData.results[j].Ernam);
+								w[i].push(dataObj.oData.results[j].Vadsoyad);
+								w[i].push(dataObj.oData.results[j].Vtext);
+								w[i].push(dataObj.oData.results[j].Bezei);
+								w[i].push(dataObj.oData.results[j].Iktext);
+								w[i].push(dataObj.oData.results[j].Bstkd);
+								w[i].push(dataObj.oData.results[j].Fvtext);
+								w[i].push(dataObj.oData.results[j].Title);
+								w[i].push(dataObj.oData.results[j].Docno);
+								w[i].push(dataObj.oData.results[j].Zzmatbuno);
+
+								}
+									
+								}
+							var excelFile = xlsx(file);
+							var link = document.createElement('a');
+							link.href = xlsx(file).href();
+							link.download = "Data.xlsx";
+							document.body.appendChild(link);
+							link.click();
+							document.body.removeChild(link);
+
+							}
+								
+								
+								this.oParent.close();
+							}
+						}),
+						content: [oFormSelection]
+					}).addStyleClass("largeDialog");
+					
+					oDialog.open();
+		//sprint7---------------------------------------------------------------------------------
 		/*    var oView = sap.ui.getCore().byId("SaleReport");
-
-
-
     var oBranchSelection = oView.byId("saleReportBranchTable").getSelectedItems();
-
-
-
     var sDateBeg = "";
-
-
-
     var sDateEnd = "";
-
-
-
     var bSummary;
-
-
-
     var sPrefix;
-
-
-
     var sIstoday;
-
-
-
     var sYear;
-
-
-
     var sMonth;
-
-
-
     var sDay;
-
-
-
     oView.byId("paymentReturn").getVisible() ? bSummary = false : bSummary = true;
-
-
-
     var oDateBeg = oView.byId("saleReportDateBeg").getDateValue();
-
-
-
     var oDateEnd = oView.byId("saleReportDateEnd").getDateValue();
-
-
-
     if (oDateBeg != null){
-
-
-
       sYear  = String(oDateBeg.getFullYear());
-
-
-
       sMonth = String(oDateBeg.getMonth() + 1);
-
-
-
       sDay   = String(oDateBeg.getDate());
-
-
-
       if(sMonth.length == 1) sMonth = "0" + sMonth;
-
-
-
       if(sDay.length == 1)   sDay   = "0" + sDay;
-
-
-
       sDateBeg = String(sYear) + String(sMonth) + String(sDay);
-
-
-
     }
-
-
-
     if (oDateEnd != null) {
-
-
-
       sYear  = String(oDateEnd.getFullYear());
-
-
-
       sMonth = String(oDateEnd.getMonth() + 1);
-
-
-
       sDay   = String(oDateEnd.getDate());
-
-
-
       if(sMonth.length == 1) sMonth = "0" + sMonth;
-
-
-
       if(sDay.length == 1)   sDay   = "0" + sDay;
-
-
-
       sDateEnd = String(sYear) + String(sMonth) + String(sDay);
-
-
-
     }
-
-
-
     bSummary ?
-
-
-
-        sPrefix = "/sap/opu/odata/sap/ZGW_AKILLI_KASA_SRV_01/salesReportOzetSet?search=Vbeln=" :
-
-
-
+       sPrefix = "/sap/opu/odata/sap/ZGW_AKILLI_KASA_SRV_01/salesReportOzetSet?search=Vbeln=" :
         sPrefix = "/sap/opu/odata/sap/ZGW_AKILLI_KASA_SRV_01/salesReportDetaySet?search=Vbeln="
-
-
-
     bIstoday ? sIstoday = "X" : sIstoday = ""; 
-
-
-
     var sUrl = sPrefix      + oView.byId("saleReportVbeln").getValue()      + "-" +
-
-
-
            "FkdatBegin="  + sDateBeg                      + "-" +
-
-
-
            "FkdatEnd="    + sDateEnd                      + "-" +
-
-
-
            "Matnr="     + oView.byId("saleReportSerial").getValue()     + "-" +
-
-
-
            "Docno="     + oView.byId("saleReportDocno").getValue()      + "-" +
-
-
-
            "VsnmrV="    + oView.byId("saleReportSaleRep").getSelectedKey()  + "-" +
-
-
-
            "Ernam="     + oView.byId("saleReportUser").getSelectedKey();
-
-
-
     if (oBranchSelection.length > 0) {
-
-
-
       for (var i = 0; i < oBranchSelection.length; i++) {
-
-
-
         sUrl = sUrl + " - " + "Altkn=" + oBranchSelection[i].getCells()[0].getText();
-
-
-
       }
-
-
-
     }
-
-
-
     else
-
-
-
       sUrl = sUrl + " - " + "Altkn=" + oBranchSelection[i].getCells()[0].getText();
-
-
-
     sUrl = sUrl + "-" + "Istoday=" + sIstoday + "&$format=xlsx";
-
-
-
     var encodeUrl = encodeURI(sUrl);
-
-
-
     sap.m.URLHelper.redirect(encodeUrl, true); */
-
 	},
-
 	/**
-
-
-
 * Set table columns visible
-
-
-
 * @memberOf zui5_ttg_app001.SaleReport
-
-
-
 */
-
 	setColumnsVisible: function(oEvent, bVisible) {
 
 		var oView = sap.ui.getCore().byId("SaleReport");

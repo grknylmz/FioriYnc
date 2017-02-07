@@ -1331,9 +1331,9 @@ sap.ui.controller("zui5_ttg_app001.Sale", {
 		
 	//yocoskun sprint 5 ----------------------
 		for (var i = 0; i < aTaxm1List.length; i++) {
-
-			if (aTaxm1List[i].Matnr === aProductID[2]) {
-
+			//yocoskun 01022017---------------------------
+			if (aTaxm1List[i].Matnr === aProductID[2] || aTaxm1List[i].Maktx === sTitle) {
+			//yocoskun 01022017------------------
 				sTaxm1 = aTaxm1List[i].Taxm1;
 				break;
 
@@ -2551,7 +2551,9 @@ sap.ui.controller("zui5_ttg_app001.Sale", {
  //                   new sap.ui.model.Filter("Vanilla",   sap.ui.model.FilterOperator.EQ, oView.byId("isVanillaDevice").getSelected())
                   ];
 		var mParameters = {
-			async: true,
+			//yocoskun 01022017 async true degıtırıldı------------------------
+			async: false,
+			//yocoskun 01022017---------------------------------
 			filters: oFilter,
 			urlParameters: null,
 			success: function(oData) {
@@ -2599,6 +2601,9 @@ sap.ui.controller("zui5_ttg_app001.Sale", {
 						for (var j = 0; j < oData.results.length; j++) {
 						aTaxm1List.push({
 							Matnr: oData.results[j].Matnr,
+							//yocoskun 01022017---------
+							Maktx: oData.results[j].Maktx, 
+							//yocoskun 01022017---------
 							Taxm1: oData.results[j].Taxm1
 						});
 					}
@@ -2650,6 +2655,13 @@ sap.ui.controller("zui5_ttg_app001.Sale", {
 						Matnr: oData.results[0].Matnr,
 						Mtart: oData.results[0].Mtart
 					});
+				//yocoskun 01022017-----------------------------
+						aTaxm1List.push({
+							Matnr: oData.results[0].Matnr,
+							Maktx: oData.results[0].Maktx,                      
+							Taxm1: oData.results[0].Taxm1
+						});
+				//yocoskun 01022017--------------------------------------------	
 					//sprint6-----------------------------------
 						if (oData.results[0].Maktx === "Diğer Satış Kalemleri") {
 							sap.m.MessageToast.show("TT, TTnet ve Avea Prim Faturaları için bu seçeneği kullanmayınız.", {
