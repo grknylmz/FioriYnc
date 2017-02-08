@@ -930,7 +930,7 @@
 
 
 
-        <Button id="saleReportSearchSummary" text="Özet Rapor" type="Emphasized" press="search" />
+      <!--  <Button id="saleReportSearchSummary" text="Özet Rapor" type="Emphasized" press="search" /> sprint8-->
 
 
 

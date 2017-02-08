@@ -57,14 +57,17 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 	onInit: function() {
 
 		var that = this;
+		
 
 		// create search form content
+		
+		var oSearchForm = that.getView().byId("saleReportSearch1"); 
 
-		var oSearchForm = that.getView().byId("saleReportSearch1");
+	//	oSearchForm.addContent(new sap.m.Button("saleReportToday", { //sprint8 id degısıtırldı
 
-		oSearchForm.addContent(new sap.m.Button("saleReportToday", {
+		oSearchForm.addContent(new sap.m.Button("saleReportSearchSummary", {//sprint8 id degısıtırldı
 
-			text: "Bugünün Satışlarını Listele",
+			text: "Satışları Listele",
 
 			type: sap.m.ButtonType.Emphasized,
 
@@ -83,22 +86,27 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 		}));
 
 		jQuery.device.is.phone ?
+		
 
+	
+		
 		oSearchForm.addContent(new sap.m.DateTimeInput("saleReportDateBeg", {
 
 			type: sap.m.DateTimeInputType.Date,
 
-			displayFormat: "dd.MM.yyyy"
+			displayFormat: "dd.MM.yyyy" 
 
 		}))
-
 		:
-
+		
 		oSearchForm.addContent(new sap.m.DatePicker("saleReportDateBeg", {
 
 			valueFormat: "yyyyMMdd",
 
 			placeholder: " "
+			
+			
+			
 
 		}));
 
@@ -341,7 +349,9 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 
 		sap.ui.getCore().byId("saleReportVbeln").setValue("");
 
-		sap.ui.getCore().byId("saleReportDateBeg").setValue("");
+		//sap.ui.getCore().byId("saleReportDateBeg").setValue(""); sprint8
+		
+		sap.ui.getCore().byId("saleReportDateBeg").setValue("07.02.2017"); //sprint8
 
 		sap.ui.getCore().byId("saleReportDateEnd").setValue("");
 
@@ -747,6 +757,7 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 
                                        new sap.m.Text({
 									text: "{Bezei}"
+									
 								}),
 
 
@@ -814,9 +825,7 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
                                        new sap.m.Text({
 									text: "{Zzefattabi}"
 								})
-
-
-
+								
                                       ]
 
 						});
@@ -1642,8 +1651,6 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 		oCheckboxXSLX.attachSelect(function() {
 				oCheckboxCSV.setSelected(false);
 		});
-		
-		
 		oFormSelection.addContent(new sap.m.Label({
 				text: "CSV Formatı"
 			}));
