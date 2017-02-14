@@ -65,7 +65,7 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 
 	//	oSearchForm.addContent(new sap.m.Button("saleReportToday", { //sprint8 id degısıtırldı
 
-		oSearchForm.addContent(new sap.m.Button("saleReportSearchSummary", {//sprint8 id degısıtırldı
+		oSearchForm.addContent(new sap.m.Button("saleReportSearchDetail", {//sprint8 id degısıtırldı
 
 			text: "Satışları Listele",
 
@@ -830,7 +830,7 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 
 						});
 
-					},
+					}
 
 				});
 
@@ -1691,7 +1691,7 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
             						}, {name: "Birim",template: {content: "TL"}
         							}, {name: "Müşteri İsmi",template: {content: "{Name1}"}
         							}, {name: "Bayi",template: {content: "{Name1w}"}
-        							}, {name: "Kullanıcı",template: {content: "{Ernam}"}
+        							}, {name: "Kullanıcı",template: {content: "{Ernam}"} 
         							}, {name: "Satış Temsilcisi",template: {content: "{Vadsoyad}"}
         							}, {name: "Ödeme Tipi",template: {content: "{Vtext}"}
 	        						}, {name: "Çıktı Tipi",template: {content: "{Bezei}"}
@@ -1721,7 +1721,7 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
                 					}, {name: "Birim",template: {content: "TL"}
                 					}, {name: "Müşteri İsmi",template: {content: "{Name1}"}
                 					}, {name: "Bayi",template: {content: "{Name1w}"}
-	            					}, {name: "Kullanıcı",template: {content: "{Ernam}"}
+	            					}, {name: "Kullanıcı",template: {content: "{Ernam}"} 
                 					}, {name: "Satış Temsilcisi",template: {content: "{Vadsoyad}"}
                 					}, {name: "Ödeme Tipi",template: {content: "{Vtext}"}
                 					}, {name: "Çıktı Tipi",template: {content: "{Bezei}"}
@@ -1798,8 +1798,8 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 								w[i].push(dataObj.oData.results[j].Bezei);
 								w[i].push(dataObj.oData.results[j].Iktext);
 								w[i].push(dataObj.oData.results[j].Bstkd);
-								//w[i].push(dataObj.oData.results[j].Fvtext);
-								w[i][18] = "";
+								//w[i].push(dataObj.oData.results[j].Fvtext); 
+								w[i][18] = ""; 
 								w[i].push(dataObj.oData.results[j].Title);
 								w[i].push(dataObj.oData.results[j].Docno);
 								w[i].push(dataObj.oData.results[j].Zzmatbuno);
@@ -1945,19 +1945,20 @@ sap.ui.controller("zui5_ttg_app001.SaleReport", {
 
 		var oColumn = oView.byId("saleReportResultTable").getColumns();
 
-		oColumn[4].setVisible(bVisible);
 
-		oColumn[5].setVisible(bVisible);
+		oColumn[4].setVisible(!bVisible); //sprint8
 
-		oColumn[6].setVisible(bVisible);
+		oColumn[5].setVisible(!bVisible); //sprint8
 
-		oColumn[7].setVisible(bVisible);
+		oColumn[6].setVisible(!bVisible); //sprint8
 
-		oColumn[8].setVisible(bVisible);
+		oColumn[7].setVisible(!bVisible); //sprint8
 
-		oColumn[24].setVisible(!bVisible);
+		oColumn[8].setVisible(!bVisible); //sprint8
 
-		oColumn[28].setVisible(!bVisible);
+		oColumn[24].setVisible(bVisible); //spint8
+
+		oColumn[28].setVisible(bVisible); //sprint8
 
 		oView.byId("paymentReturn").setVisible(bVisible);
 
